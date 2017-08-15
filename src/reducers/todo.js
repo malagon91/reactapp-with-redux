@@ -7,13 +7,18 @@ const initState ={
     currentTodo:'temp'
 }
 
-export const updateCurrent =(val) =>({type:'CURRENT_UPDATE',payload: val})
+export const ActionTypes = {
+    Add_todo: 'TODO_ADD',
+    Current_update: 'CURRENT_UPDATE'
+}
+
+export const updateCurrent =(val) =>({type:ActionTypes.Current_update,payload: val})
 
 export default (state = initState,action) =>{
     switch (action.type){
-        case 'TODO_ADD':
+        case ActionTypes.Add_todo:
             return {...state , todos: state.todos.concat(action.payload)}
-        case 'CURRENT_UPDATE':
+        case ActionTypes.Current_update:
             return {...state,currentTodo: action.payload}
         default:
         return state
