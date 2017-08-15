@@ -3,15 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-
-//app state is been declared here 
-const state ={
-  todos:[
-    {id:1, name:'Render static UI',isComplete:true},
-    {id:2, name:'Create initial state',isComplete:true},
-    {id:3, name:'Render based on state',isComplete:false}
-  ]
+import store from './store'
+import {updateCurrent} from './reducers/todo'
+const todoChangeHandler =(val) =>{
+  store.dispatch(updateCurrent(val))
 }
 
-ReactDOM.render(<App todos={state.todos} />, document.getElementById('root'));
-registerServiceWorker();
+const render =() =>{
+   //app state is been declared here
+  const state = store.getState()
+  ReactDOM.render(<App 
+    todos ={state.todos} 
+    currentTodo = {state.currentTodo}
+    changeCurrent={todoChangeHandler} />, 
+    document.getElementById('root'));
+
+}
+render()
+//como entiendo se hace esto para que cada que cambie el state de redux 
+// se vuelva a llamar el metodo  render y pinte los cambios en pantalla
+store.subscribe(render)
+
+ registerServiceWorker();

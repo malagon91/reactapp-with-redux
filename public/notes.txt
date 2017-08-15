@@ -1,0 +1,5 @@
+En el payload del objeto de redux va el objeto que se va a cambiar o a agregar es el 
+movimiento que se va a hacer dentro de la app
+
+Payload is just a property on an object, so it can carry whatever data needs to 
+go with that action in order to get the expected state back out.
