@@ -1,0 +1,1 @@
+This example it was made for learn reactjs with redux based on egghead tutorial [link](https://egghead.io/courses/build-a-react-app-with-redux)
