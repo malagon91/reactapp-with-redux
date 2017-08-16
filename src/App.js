@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
+//import {connect} from 'react-redux' se simplifico
 import logo from './logo.svg';
 import './miapp.css';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
-import {updateCurrent} from './reducers/todo'
+
 //import {bindActionCreators} from 'redux'  ** Ya no se ocupo con el connect
 
 class App extends Component {
@@ -17,9 +17,10 @@ class App extends Component {
         </div>
         <div className="Todo-App">
           <TodoForm 
-          currentTodo={this.props.currentTodo} 
-          changeCurrent={this.props.updateCurrent} />
-          <TodoList todos= {this.props.todos}/>
+         // currentTodo={this.props.currentTodo}  //se elimino con el connect
+        //  changeCurrent={this.props.updateCurrent} 
+        />
+          <TodoList/>
         </div>
       </div>
     );
@@ -42,8 +43,4 @@ class App extends Component {
 // export default ConnectedApp
 //***Segunda simplificacion
 //here: 
-export default connect(
-  (state)=>state,
-  {updateCurrent})
-  (App)
-
+export default App
