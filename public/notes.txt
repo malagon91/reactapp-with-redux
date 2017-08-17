@@ -3,3 +3,23 @@ movimiento que se va a hacer dentro de la app
 
 Payload is just a property on an object, so it can carry whatever data needs to 
 go with that action in order to get the expected state back out.
+
+para poder los tools de redux necesitamos instalar 
+yarn add redux-devtools-extension
+
+
+EL video final se mostro como prepara nuestra app para producion y lo que se
+hace es crear 2 archivos (.env, .env.production) en el cual se ponen los paths 
+de los API que se ocupan en los 2 ambientes 
+en el de produccion a la url solo se le agrego el punto (./todos) porque se supone debe de 
+tomar la misma direccion de la pagina
+
+por ultimo en el task de start juntamos la funcion del json server 
+y la de start que hace que la app funcione 
+
+para ejecutarlo en produccion primero ejecutamos la funcion yarn build 
+y luego yarn start
+
+para enviar la app a producion primero instalamos la siguiente libreria de npm
+npm install -g now
+y luego ejecutamos "now" en la terminal

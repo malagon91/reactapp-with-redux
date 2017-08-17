@@ -1,11 +1,14 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux'
-import {fetchTodos} from '../reducers/todo'
+import {fetchTodos,toggleTodo,deleteTodo, getVisibleTodos} from '../reducers/todo'
 
-const TodoItem = ({ id, name, isComplete }) => (
+const TodoItem = ({ id, name, isComplete,toggleTodo,deleteTodo }) => (
   <li>
+    <span className="delete-item">
+    <button onClick={() => deleteTodo(id)}>X</button>
+    </span>
     <input type="checkbox" 
-      defaultChecked={isComplete} />{name}
+      defaultChecked={isComplete} onChange={()=>toggleTodo(id)} />{name}
   </li>
 )
 
@@ -14,20 +17,23 @@ class TodoList extends Component {
     this.props.fetchTodos()
   }
   render() {
-    console.log(this.props.todos)
     return (
       <div className="Todo-List">
         <ul>
-          {this.props.todos.map(todo => <TodoItem key={todo.id} {...todo} />)}
+          {this.props.todos.map(todo => <TodoItem key={todo.id} 
+            toggleTodo ={this.props.toggleTodo} 
+            deleteTodo ={this.props.deleteTodo}
+            {...todo} />)}
         </ul>
       </div>
     )
   }
 }
-
+//ownProps Trae los props propios del component, no los que redux pasa por eso 
+//ese prop se declaro dentro del component en app.js
 export default connect(
-  (state) =>({todos: state.todos}),
-  {fetchTodos}
+  (state,ownProps) =>({todos: getVisibleTodos(state.todo.todos,ownProps.filter)}),
+  {fetchTodos,toggleTodo,deleteTodo}
 )(TodoList)
 
 /**

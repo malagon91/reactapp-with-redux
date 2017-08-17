@@ -4,6 +4,11 @@ import logo from './logo.svg';
 import './miapp.css';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
+import Message from './components/Message';
+//add router 
+import { BrowserRouter as Router,Route} from 'react-router-dom'
+import Footer from './components/Footer'
+
 
 //import {bindActionCreators} from 'redux'  ** Ya no se ocupo con el connect
 
@@ -15,13 +20,20 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React with Redux</h2>
         </div>
-        <div className="Todo-App">
-          <TodoForm 
-         // currentTodo={this.props.currentTodo}  //se elimino con el connect
-        //  changeCurrent={this.props.updateCurrent} 
-        />
-          <TodoList/>
-        </div>
+        <Router>
+          <div className="Todo-App">
+            <Message />
+            <TodoForm
+            // currentTodo={this.props.currentTodo}  //se elimino con el connect
+            //  changeCurrent={this.props.updateCurrent} 
+            />
+            <Route path='/:filter?' render={({match}) => (
+              <TodoList  filter ={match.params.filter}/>
+            )}
+            />
+            <Footer />
+          </div>
+        </Router>
       </div>
     );
   }
